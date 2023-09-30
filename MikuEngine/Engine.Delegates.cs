@@ -3,15 +3,18 @@
 #pragma warning disable IDE0044
 
 using System;
-using Jint;
+using Tenray.Topaz;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MikuEngine
 {
     //this part of engine class contains fileds and methods to work with delegates
     public partial class Engine
     {
-        private Action _waitCallback, _clearTextFiled;
+        private Func<CancellationToken, Task> _waitCallback;
+        private Action _clearTextFiled;
         private Action<string> _printText;
         private Action<byte[]> _saveEngineState;
 
@@ -57,7 +60,7 @@ namespace MikuEngine
 
         private void waitUserInput()
         {
-            invokeWithPositionCheck(_waitCallback);
+            //invokeWithPositionCheck(_waitCallback);
         }
 
         private void saveState(){
